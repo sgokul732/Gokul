@@ -1,0 +1,69 @@
+<h3>Boat Id to update: {{boatToUpdate.boatId}}</h3>
+<form (ngSubmit)="updateBoatDetails()" #boatUpdateForm="ngForm">
+    <table class="table">
+        <tr>
+            <th>Boat Type:</th>
+            <div *ngFor="let boatType of boatTypes">      
+              <input [(ngModel)]="boatToUpdate.boatType" type="radio" [value]="boatType" name="boatType" />      
+              {{boatType}}      
+            </div>
+        </tr>
+    <tr>
+        <th>Location:</th>
+        <select class="form-control" [(ngModel)]="boatToUpdate.location" name="location" #location="ngModel"> <!--Line1-->     
+             <option *ngFor="let location of locations" [value]="location">{{location}}</option><!--Line2--> 
+        </select>
+     </tr>
+     
+    <tr>
+        <th>Description:</th>
+        <td>      
+          <textarea class="form-control" required cols="40" rows="3" [(ngModel)]="boatToUpdate.description" name="description" #description="ngModel" required></textarea>
+          <div [hidden]="description.valid || description.pristine" class="bordering-error">
+              <small>Description is mandatory</small>
+        </div>
+        </td>
+        
+    </tr>
+    
+
+    <tr>
+        <th>Base Price:</th>
+        <td>      
+          <input type="number" class="form-control" [(ngModel)]="boatToUpdate.basePrice" min="100" name="basePrice" />      
+        </td>
+    </tr>
+    <tr>    
+        <th>Discount:</th>
+        <td>    
+        <input type="number" class="form-control" [(ngModel)]="boatToUpdate.discount" name="discount" required/>    
+        </td>    
+    </tr>
+    <tr>
+        <th>Booking stats from:</th>
+        <td>      
+          <input type="date" class="form-control" [(ngModel)]="boatToUpdate.bookingStart" name="bookingStart"/>
+         </td>
+    </tr>
+    <tr>
+        <th>Days allowed for Booking:</th>
+        <td>      
+          <input type="number" class="form-control" [(ngModel)]="boatToUpdate.allowedDays" name="allowedDays" />  
+        </td>
+    </tr>
+    <tr>
+            <th>Final Price per day:</th>
+            <td> Final Amount is {{(boatToUpdate.basePrice *(1-boatToUpdate.discount))|currency:'USD':true}} 
+                for a base price of {{boatToUpdate.basePrice|currency:'USD':true}} and a discount of {{boatToUpdate.discount|percent}}
+            </td>
+        </tr>
+      </table>
+      <div class="row">
+          <button [disabled]="!boatUpdateForm.form.valid || boatUpdateForm.form.pristine"
+           class="col-md-4 col-md-offset-4 btn btn-success">Update Details</button>
+      </div>
+      
+    </form>
+    <div *ngIf="boatToUpdate.message!=null" class="row">    
+        {{boatToUpdate.message}}    
+    </div>

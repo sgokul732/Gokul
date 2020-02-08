@@ -1,0 +1,53 @@
+<!--
+<div *ngIf="!addBoatFlag">
+    <h3>Showing all the operational boats across India</h3>
+</div> 
+-->
+<div class="row">
+    <h3 class="text-center">Showing all the operational boats across India</h3>
+<div class="col-md-6 col-md-offset-3 bordering" *ngIf="!addBoatFlag">
+    <!-- Line 2 -->
+    <div class="text-left">
+        <!-- we don't need this part anymore as routing will do this
+            <button class="btn-link anchor-link !important" (click)="addBoat()">                
+            <h4>Click here to Add a new Boat</h4>
+            </button>
+        -->
+    </div>
+    <table [ngClass]="{'table':true, 'table-striped':true,
+        'table-responsive':true}">
+        <thead>
+            <tr>
+                <th>Boat Type</th>
+                <th>Location</th>
+                <th>Base Price</th>
+                <th>Booking starts from</th>
+                    <td>
+                       <button class="btn btn-success" (click)="goForward()">Go Forward</button>          
+                    </td>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let boat of boatData">
+                <td>{{boat.boatType | uppercase}}</td>
+                <td>{{boat.location}}</td>
+                <td>{{boat.basePrice}}</td>
+                <td>{{boat.bookingStart | date:'dd MMM, yyyy'}}</td>
+                <td>
+                    <button Class="btn btn-success btn-sm" (click)="gotoDetails(boat)">View Details</button>
+                    <!-- <button Class="btn btn-success btn-sm" (click)="onSelect(boat)">View or Update Details</button> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- we don't need this part anymore as routing will do this
+    <div [class]="col-md-5">
+    <div *ngIf="showDetailFlag">
+        <boat-details [chosenBoat]="displayBoat"></boat-details>
+    </div>
+    <boat-add *ngIf="addBoatFlag"></boat-add>
+    
+</div> -->
+</div>

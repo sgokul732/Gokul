@@ -1,0 +1,7 @@
+
+<table border="1">
+  <tr><th [attr.colspan]="columnspan">employeeDetails</th><th>address</th></tr>
+  <tr *ngFor="let employee of employees">
+    <td>{{employee.employeeName}}</td><td>{{employee.contactNo}}</td><td>{{employee.address}}</td></tr>
+
+</table>
